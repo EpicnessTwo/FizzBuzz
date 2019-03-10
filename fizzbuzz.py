@@ -8,4 +8,5 @@ for i in range(1,101,1):
     else:
         o=i
     print(o)
-input()
+# You may want to uncomment this in some cases to read the result
+# input()
