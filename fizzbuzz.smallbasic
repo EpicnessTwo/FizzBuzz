@@ -1,0 +1,13 @@
+For i = 1 To 100 Step 1
+  o = ""
+  If Math.Remainder(i, 3) = 0 Then
+    o = o + "Fizz"
+  EndIf
+  If Math.Remainder(i, 5) = 0 Then
+    o = o + "Buzz"
+  EndIf
+  If o = "" Then
+    o = i
+  EndIf
+  TextWindow.WriteLine(o)
+EndFor
