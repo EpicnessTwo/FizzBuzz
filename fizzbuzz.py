@@ -1,12 +1,3 @@
 # Written/tested with Python 3.7.2 on Windows
-for i in range(1,101,1):
-    o=""
-    if i%3 == 0:
-        o+="Fizz"
-    if i%5 == 0:
-        o+="Buzz"
-    else:
-        o=i
-    print(o)
-# You may want to uncomment this in some cases to read the result
-# input()
+# The beauty of Python, is that almost everything can be done on a single line ;-)
+print '\n'.join("Fizz"*(i%3==0)+"Buzz"*(i%5==0) or str(i) for i in range(1,101)) 
