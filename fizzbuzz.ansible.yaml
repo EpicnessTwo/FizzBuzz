@@ -1,0 +1,9 @@
+# Usage: ansible-playbook fizzbuzz.ansible.yaml
+---
+- hosts: localhost
+  tasks:
+    - shell: sh fizzbuzz.sh
+      register: shell_result
+
+    - debug:
+        var: shell_result.stdout_lines
