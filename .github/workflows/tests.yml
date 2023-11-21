@@ -15,7 +15,7 @@ jobs:
         node-version: '14'
 
     - name: Run Test
-      run: node fizzbuzz.js > /tmp/js.txt
+      run: node fizzbuzz.js | tr -d '\r' > /tmp/js.txt
 
     - name: Compare output
-      run: diff /tmp/js.txt fizzbuzz.txt
+      run: diff -i /tmp/js.txt fizzbuzz.txt
