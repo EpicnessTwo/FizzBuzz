@@ -43,7 +43,7 @@ jobs:
     - name: Compare output
       run: diff -i /tmp/python.txt /tmp/check.txt
 
-    test-php:
+  test-php:
     runs-on: ubuntu-latest
 
     steps:
