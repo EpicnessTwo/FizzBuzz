@@ -22,3 +22,119 @@ jobs:
 
     - name: Compare output
       run: diff -i /tmp/js.txt /tmp/check.txt
+
+  test-python:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Run Test
+      run: python fizzbuzz.py | tr -d '\r' > /tmp/python.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/python.txt /tmp/check.txt
+
+    test-php:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: Run Test
+      run: php fizzbuzz.php | tr -d '\r' > /tmp/php.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/php.txt /tmp/check.txt
+
+  test-ada:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Ada Compiler (GNAT)
+      run: sudo apt-get install -y gnat
+
+    - name: Compile FizzBuzz
+      run: gnatmake fizzbuzz.adb
+
+    - name: Run Test
+      run: ./fizzbuzz | tr -d '\r' > /tmp/ada.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/ada.txt /tmp/check.txt
+
+  test-batch:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run Test
+      run: .\fizzbuzz.bat > tmp-batch.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > tmp-check.txt
+
+    - name: Compare output
+      shell: bash
+      run: diff -i tmp-batch.txt tmp-check.txt
+
+  test-brainfuck:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Brainfuck Interpreter
+      run: sudo apt-get install -y bf
+
+    - name: Run Test
+      run: bf fizzbuzz.brainfuck | tr -d '\r' > /tmp/brainfuck.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/brainfuck.txt /tmp/check.txt
+
+  test-cpp:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install g++
+      run: sudo apt-get install g++ -y
+
+    - name: Compile FizzBuzz
+      run: g++ -o fizzbuzz fizzbuzz.cpp
+
+    - name: Run Test
+      run: ./fizzbuzz | tr -d '\r' > /tmp/cpp.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/cpp.txt /tmp/check.txt
