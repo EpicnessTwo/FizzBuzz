@@ -73,7 +73,7 @@ jobs:
       run: sudo apt-get install -y gnat
 
     - name: Compile FizzBuzz
-      run: gnatmake fizzbuzz.adb
+      run: gnatmake fizzbuzz.ada
 
     - name: Run Test
       run: ./fizzbuzz | tr -d '\r' > /tmp/ada.txt
