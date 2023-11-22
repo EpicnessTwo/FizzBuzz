@@ -32,7 +32,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'
+        python-version: '2.7'
 
     - name: Run Test
       run: python fizzbuzz.py | tr -d '\r' > /tmp/python.txt
@@ -138,3 +138,145 @@ jobs:
 
     - name: Compare output
       run: diff -i /tmp/cpp.txt /tmp/check.txt
+
+  test-dart:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Dart SDK
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: stable
+
+    - name: Run Test
+      run: dart run fizzbuzz.dart | tr -d '\r' > /tmp/dart.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/dart.txt /tmp/check.txt
+
+  test-go:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.16'
+
+    - name: Run Test
+      run: go run fizzbuzz.go | tr -d '\r' > /tmp/go.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/go.txt /tmp/check.txt
+
+  test-groovy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Install Groovy
+      run: sudo apt-get install groovy -y
+
+    - name: Run Test
+      run: groovy fizzbuzz.groovy | tr -d '\r' > /tmp/groovy.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/groovy.txt /tmp/check.txt
+
+  test-ruby:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+
+    - name: Run Test
+      run: ruby fizzbuzz.rb | tr -d '\r' > /tmp/ruby.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/ruby.txt /tmp/check.txt
+
+  test-rust:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+
+    - name: Compile FizzBuzz
+      run: rustc -o fizzbuzz fizzbuzz.rs
+
+    - name: Run Test
+      run: ./fizzbuzz | tr -d '\r' > /tmp/rust.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/rust.txt /tmp/check.txt
+
+  test-shell:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run Test
+      run: bash fizzbuzz.sh | tr -d '\r' > /tmp/shell.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/shell.txt /tmp/check.txt
+    
+  test-tcl:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Tcl
+      run: sudo apt-get install tcl -y
+
+    - name: Run Test
+      run: tclsh fizzbuzz.tcl | tr -d '\r' > /tmp/tcl.txt
+
+    - name: Setup Check File
+      run: cat fizzbuzz.txt | tr -d '\r' > /tmp/check.txt
+
+    - name: Compare output
+      run: diff -i /tmp/tcl.txt /tmp/check.txt
+    
